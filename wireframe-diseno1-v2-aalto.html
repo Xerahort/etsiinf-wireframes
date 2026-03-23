@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireframe — Diseño 1 v2: Estilo Aalto</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Patrick+Hand&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --font:'Architects Daughter','Comic Sans MS',cursive;
+  --font2:'Patrick Hand','Comic Sans MS',cursive;
+  --black:#1a1a1a;
+  --white:#fff;
+  --bg:#fafafa;
+  --gray-50:#f7f7f5;
+  --gray-100:#efefeb;
+  --gray-200:#e0e0d8;
+  --gray-300:#c8c8c0;
+  --gray-400:#999;
+  --gray-500:#777;
+  --gray-600:#555;
+  --accent:#0047FF;
+  --accent-light:#e8efff;
+  --img-bg:#e4e4dc;
+  --radius:6px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--white);color:var(--black);line-height:1.5;max-width:1200px;margin:0 auto;border:2px solid var(--gray-200)}
+
+.img-placeholder{background:var(--img-bg);display:flex;align-items:center;justify-content:center;color:var(--gray-500);font-size:13px;position:relative;overflow:hidden}
+.img-placeholder::before,.img-placeholder::after{content:'';position:absolute;background:var(--gray-300);opacity:.4}
+.img-placeholder::before{width:141%;height:1px;top:50%;left:-20%;transform:rotate(45deg)}
+.img-placeholder::after{width:141%;height:1px;top:50%;left:-20%;transform:rotate(-45deg)}
+
+.title-bar{background:var(--black);color:var(--white);text-align:center;padding:8px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
+
+/* ===== HEADER — Aalto style: clean, spacious, permanent CTA ===== */
+.header{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--gray-200)}
+.header-utility{display:flex;justify-content:space-between;align-items:center;padding:6px 40px;font-size:11px;color:var(--gray-500);border-bottom:1px solid var(--gray-100)}
+.header-utility a{color:var(--gray-500);text-decoration:none;margin-right:16px}
+.header-utility a:hover{color:var(--black)}
+.audience-links{display:flex;gap:0}
+.audience-links a{padding:4px 14px;border-right:1px solid var(--gray-200);font-size:11px;text-decoration:none;color:var(--gray-500)}
+.audience-links a:last-child{border-right:none}
+.audience-links a:hover{color:var(--accent)}
+
+.header-main{display:flex;justify-content:space-between;align-items:center;padding:16px 40px}
+.logo{display:flex;align-items:center;gap:14px}
+.logo-mark{width:48px;height:48px;background:var(--black);border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--white);font-size:10px;font-weight:bold;line-height:1.1;text-align:center}
+.logo-text{font-family:var(--font2);font-size:20px;font-weight:bold;letter-spacing:-.5px;line-height:1.1}
+.logo-text small{font-size:11px;font-weight:normal;color:var(--gray-500);display:block;letter-spacing:0;font-family:var(--font)}
+
+.nav-main{display:flex;gap:0;align-items:center}
+.nav-main a{text-decoration:none;color:var(--black);font-size:14px;padding:8px 18px;position:relative}
+.nav-main a::after{content:'';position:absolute;bottom:0;left:18px;right:18px;height:2px;background:transparent}
+.nav-main a:hover::after{background:var(--black)}
+
+.header-actions{display:flex;align-items:center;gap:12px}
+.lang-pill{font-size:11px;padding:4px 10px;border:1px solid var(--gray-200);border-radius:20px;color:var(--gray-500);cursor:pointer}
+.lang-pill:hover{border-color:var(--black);color:var(--black)}
+.cta-apply{background:var(--black);color:var(--white);border:none;padding:10px 24px;border-radius:4px;font-family:var(--font);font-size:13px;cursor:pointer;letter-spacing:.3px;transition:.2s}
+.cta-apply:hover{background:var(--accent)}
+
+/* ===== HERO — Aalto: massive typography, minimal, generous space ===== */
+.hero{padding:80px 40px 72px;position:relative;min-height:520px;display:flex;flex-direction:column;justify-content:center}
+.hero-label{font-size:13px;color:var(--gray-500);text-transform:uppercase;letter-spacing:2px;margin-bottom:20px}
+.hero h1{font-family:var(--font2);font-size:56px;line-height:1.05;letter-spacing:-1.5px;max-width:680px;margin-bottom:20px}
+.hero-body{font-size:17px;color:var(--gray-600);max-width:520px;margin-bottom:40px;line-height:1.6}
+.hero-ctas{display:flex;gap:14px;margin-bottom:56px}
+.hero-ctas .btn-lg{padding:14px 32px;font-size:15px;font-family:var(--font);border-radius:4px;cursor:pointer;border:2px solid var(--black)}
+.btn-filled{background:var(--black);color:var(--white);border-color:var(--black)}
+.btn-filled:hover{background:var(--accent);border-color:var(--accent)}
+.btn-ghost{background:transparent;color:var(--black)}
+.btn-ghost:hover{background:var(--gray-50)}
+
+.hero-stats{display:flex;gap:48px}
+.hero-stat{position:relative;padding-left:20px}
+.hero-stat::before{content:'';position:absolute;left:0;top:4px;bottom:4px;width:3px;background:var(--black)}
+.hero-stat-num{font-family:var(--font2);font-size:36px;line-height:1;letter-spacing:-1px;display:block}
+.hero-stat-label{font-size:12px;color:var(--gray-500);text-transform:uppercase;letter-spacing:1px;margin-top:4px;display:block}
+
+.hero-image{position:absolute;right:0;top:0;bottom:0;width:42%;border-left:1px solid var(--gray-200)}
+
+/* ===== SECTION SYSTEM — Aalto generous spacing ===== */
+.section{padding:72px 40px;border-top:1px solid var(--gray-200)}
+.section-header{margin-bottom:40px;max-width:560px}
+.section-label{font-size:12px;color:var(--gray-400);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px}
+.section-title{font-family:var(--font2);font-size:32px;letter-spacing:-.5px;line-height:1.15;margin-bottom:8px}
+.section-desc{font-size:15px;color:var(--gray-500);line-height:1.5}
+
+/* ===== ESTUDIOS — Clean cards, minimal borders ===== */
+.filter-row{display:flex;gap:8px;margin-bottom:32px}
+.filter-pill{padding:7px 20px;border:1.5px solid var(--gray-200);border-radius:24px;font-size:13px;font-family:var(--font);cursor:pointer;background:transparent;color:var(--gray-600)}
+.filter-pill:first-child{background:var(--black);color:var(--white);border-color:var(--black)}
+.filter-pill:hover:not(:first-child){border-color:var(--black);color:var(--black)}
+
+.study-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.study-card{border:1.5px solid var(--gray-200);border-radius:var(--radius);padding:24px;position:relative;transition:border-color .2s}
+.study-card:hover{border-color:var(--black)}
+.study-type{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--accent);margin-bottom:10px;display:block}
+.study-card h3{font-size:16px;margin-bottom:12px;line-height:1.25}
+.study-meta{font-size:12px;color:var(--gray-500);line-height:1.8}
+.study-meta span{display:block}
+.study-link{display:block;margin-top:14px;font-size:13px;color:var(--black);text-decoration:none;font-weight:bold}
+.study-link:hover{color:var(--accent)}
+.study-link::after{content:' →'}
+
+/* ===== INVESTIGACIÓN — Aalto minimal cards with accent line ===== */
+.research-row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.research-item{padding:28px 0;border-top:3px solid var(--black);position:relative}
+.research-item:nth-child(2){border-top-color:var(--accent)}
+.research-item:nth-child(3){border-top-color:#666}
+.research-item:nth-child(4){border-top-color:var(--gray-300)}
+.research-item h3{font-size:16px;margin-bottom:8px}
+.research-item p{font-size:13px;color:var(--gray-500);line-height:1.5;margin-bottom:12px}
+.research-item a{font-size:13px;color:var(--black);text-decoration:none;font-weight:bold}
+.research-item a:hover{color:var(--accent)}
+.research-item a::after{content:' →'}
+
+/* ===== STUDENT STORIES — Aalto editorial layout, generous ===== */
+.stories-section{background:var(--gray-50)}
+.stories-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.story{border-radius:var(--radius);overflow:hidden;background:var(--white);border:1px solid var(--gray-200)}
+.story-img{height:200px;border-bottom:1px solid var(--gray-200)}
+.story-body{padding:24px}
+.story-quote{font-size:15px;line-height:1.6;color:var(--gray-600);margin-bottom:16px;font-style:italic}
+.story-quote::before{content:open-quote;font-size:28px;color:var(--gray-300);line-height:0;vertical-align:-6px;margin-right:2px}
+.story-quote::after{content:close-quote;font-size:28px;color:var(--gray-300);line-height:0;vertical-align:-6px;margin-left:2px}
+.story-person{font-size:14px;font-weight:bold}
+.story-detail{font-size:12px;color:var(--gray-400)}
+.dots{display:flex;justify-content:center;gap:8px;margin-top:32px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--gray-300)}
+.dot:first-child{background:var(--black)}
+
+/* ===== NOTICIAS — Aalto editorial grid ===== */
+.news-grid{display:grid;grid-template-columns:1fr 1fr 300px;gap:24px}
+.news-featured{grid-row:span 2;border:1px solid var(--gray-200);border-radius:var(--radius);overflow:hidden}
+.news-featured .news-img{height:240px;border-bottom:1px solid var(--gray-200)}
+.news-featured .news-content{padding:24px}
+.news-featured .news-tag{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--accent);margin-bottom:6px;display:block}
+.news-featured h3{font-size:20px;margin-bottom:8px;line-height:1.25}
+.news-featured p{font-size:14px;color:var(--gray-500);line-height:1.5}
+.news-featured .news-date{font-size:11px;color:var(--gray-400);margin-top:12px;display:block}
+
+.news-small{border-bottom:1px solid var(--gray-200);padding-bottom:16px}
+.news-small .news-tag{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--accent);margin-bottom:4px;display:block}
+.news-small h4{font-size:15px;margin-bottom:4px;line-height:1.3}
+.news-small .news-date{font-size:11px;color:var(--gray-400)}
+
+.events-col{border-left:1px solid var(--gray-200);padding-left:24px}
+.events-col h3{font-size:14px;text-transform:uppercase;letter-spacing:1px;margin-bottom:20px;color:var(--gray-400)}
+.event{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--gray-100)}
+.event-date{font-family:var(--font2);font-size:28px;line-height:1;margin-bottom:4px}
+.event-month{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--gray-400);margin-bottom:6px;display:block}
+.event h4{font-size:14px;margin-bottom:2px}
+.event p{font-size:12px;color:var(--gray-500)}
+
+/* ===== FOOTER — Aalto: clean, structured, generous ===== */
+.footer{background:var(--black);color:var(--gray-300);padding:56px 40px 32px}
+.footer-top{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer h4{color:var(--white);font-size:13px;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px}
+.footer a{color:var(--gray-400);text-decoration:none;display:block;margin-bottom:6px;font-size:13px}
+.footer a:hover{color:var(--white)}
+.footer-brand{font-family:var(--font2);font-size:22px;color:var(--white);margin-bottom:8px}
+.footer-brand-sub{font-size:12px;color:var(--gray-500);line-height:1.5;max-width:280px}
+.footer-divider{border:none;border-top:1px solid #444;margin:0 0 20px}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--gray-500)}
+.footer-a11y{background:#333;padding:5px 14px;border-radius:3px;color:var(--gray-300);text-decoration:none;font-size:11px;border:1px solid #555}
+.footer-a11y:hover{background:#444;color:var(--white)}
+.footer-social{display:flex;gap:16px}
+.footer-social a{color:var(--gray-500);font-size:12px}
+.footer-social a:hover{color:var(--white)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:960px){
+  .study-grid,.research-row{grid-template-columns:repeat(2,1fr)}
+  .stories-grid{grid-template-columns:1fr}
+  .news-grid{grid-template-columns:1fr}
+  .events-col{border-left:none;padding-left:0;border-top:1px solid var(--gray-200);padding-top:24px}
+  .hero-image{display:none}
+  .hero h1{font-size:40px}
+  .hero-stats{flex-wrap:wrap;gap:24px}
+  .footer-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .study-grid,.research-row{grid-template-columns:1fr}
+  .hero{padding:48px 24px}
+  .section{padding:48px 24px}
+  .header-main{padding:12px 16px}
+  .header-utility{padding:6px 16px}
+  .nav-main{display:none}
+  .footer{padding:40px 24px 24px}
+  .footer-top{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="title-bar">WIREFRAME — DISEÑO 1 v2: ESTILO AALTO &nbsp;·&nbsp; Minimalista · Espacioso · Tipografía expresiva · CTA permanente</div>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="header-utility">
+    <div>
+      <a href="#">⇥ Skip to content</a>
+      <a href="#">◐ Alto contraste</a>
+    </div>
+    <div class="audience-links">
+      <a href="#"><strong>Futuro Estudiante</strong></a>
+      <a href="#">Estudiante</a>
+      <a href="#">PDI / PTGAS</a>
+      <a href="#">Empresa</a>
+      <a href="#">Alumni</a>
+    </div>
+    <div>
+      <span class="lang-pill">ES</span>
+      <span class="lang-pill">EN</span>
+    </div>
+  </div>
+  <div class="header-main">
+    <div class="logo">
+      <div class="logo-mark">ETSI<br>INF</div>
+      <div class="logo-text">ETSIINF<small>Universidad Politécnica de Madrid</small></div>
+    </div>
+    <nav class="nav-main">
+      <a href="#">La Escuela</a>
+      <a href="#">Estudios</a>
+      <a href="#">Investigación</a>
+      <a href="#">Conecta</a>
+      <a href="#">Noticias</a>
+    </nav>
+    <div class="header-actions">
+      <button class="cta-apply">Estudia en la ETSIINF</button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-label">Escuela de Ingeniería Informática</div>
+  <h1>Formamos a quienes crean el futuro digital</h1>
+  <p class="hero-body">La escuela de informática de referencia en Madrid. Más de 50 años formando ingenieros que transforman el mundo con tecnología.</p>
+  <div class="hero-ctas">
+    <button class="btn-lg btn-filled">Descubre nuestros estudios</button>
+    <button class="btn-lg btn-ghost">Solicita información</button>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="hero-stat-num">4</span><span class="hero-stat-label">Grados</span></div>
+    <div class="hero-stat"><span class="hero-stat-num">6</span><span class="hero-stat-label">Másteres</span></div>
+    <div class="hero-stat"><span class="hero-stat-num">98%</span><span class="hero-stat-label">Empleabilidad</span></div>
+    <div class="hero-stat"><span class="hero-stat-num">+50</span><span class="hero-stat-label">Años</span></div>
+  </div>
+  <div class="hero-image img-placeholder">
+    <span style="z-index:1;background:var(--img-bg);padding:6px 14px;border-radius:4px;font-size:12px">📷 Fotografía artística campus<br>(no stock, estilo Aalto)</span>
+  </div>
+</section>
+
+<!-- ===== ESTUDIOS ===== -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Estudios</div>
+    <div class="section-title">Encuentra tu camino en la informática</div>
+    <div class="section-desc">Grados, másteres y doctorado para cada perfil. Formación rigurosa con conexión directa al mercado laboral.</div>
+  </div>
+  <div class="filter-row">
+    <button class="filter-pill">Todos</button>
+    <button class="filter-pill">Grado</button>
+    <button class="filter-pill">Máster</button>
+    <button class="filter-pill">Doctorado</button>
+    <button class="filter-pill">Título propio</button>
+  </div>
+  <div class="study-grid">
+    <div class="study-card">
+      <span class="study-type">Grado</span>
+      <h3>Ingeniería Informática</h3>
+      <div class="study-meta">
+        <span>4 años · 240 ECTS</span>
+        <span>Nota corte: 10,2</span>
+        <span>ES / EN parcial</span>
+      </div>
+      <a class="study-link" href="#">Ver ficha completa</a>
+    </div>
+    <div class="study-card">
+      <span class="study-type">Grado</span>
+      <h3>Ciencia de Datos e Inteligencia Artificial</h3>
+      <div class="study-meta">
+        <span>4 años · 240 ECTS</span>
+        <span>Nota corte: 12,1</span>
+        <span>ES / EN parcial</span>
+      </div>
+      <a class="study-link" href="#">Ver ficha completa</a>
+    </div>
+    <div class="study-card">
+      <span class="study-type">Grado</span>
+      <h3>Matemáticas e Informática</h3>
+      <div class="study-meta">
+        <span>5 años · 348 ECTS</span>
+        <span>Nota corte: 13,1</span>
+        <span>ES</span>
+      </div>
+      <a class="study-link" href="#">Ver ficha completa</a>
+    </div>
+    <div class="study-card">
+      <span class="study-type">Doble Grado</span>
+      <h3>Ing. Informática + ADE</h3>
+      <div class="study-meta">
+        <span>5,5 años · 366 ECTS</span>
+        <span>Nota corte: 11,5</span>
+        <span>ES</span>
+      </div>
+      <a class="study-link" href="#">Ver ficha completa</a>
+    </div>
+  </div>
+  <div style="margin-top:28px">
+    <a href="#" style="font-size:14px;color:var(--black);font-weight:bold;text-decoration:none">Ver todos los másteres y doctorado →</a>
+  </div>
+</section>
+
+<!-- ===== INVESTIGACIÓN ===== -->
+<section class="section" style="background:var(--gray-50)">
+  <div class="section-header">
+    <div class="section-label">Investigación</div>
+    <div class="section-title">Investigación con impacto</div>
+    <div class="section-desc">Nuestros ejes de investigación conectan la tecnología con los grandes retos de la sociedad.</div>
+  </div>
+  <div class="research-row">
+    <div class="research-item">
+      <h3>IA y Sociedad</h3>
+      <p>Machine learning, procesamiento del lenguaje natural, visión artificial, ética en IA</p>
+      <a href="#">Explorar grupos</a>
+    </div>
+    <div class="research-item">
+      <h3>Ciberseguridad</h3>
+      <p>Criptografía, seguridad de redes, análisis forense digital, privacidad</p>
+      <a href="#">Explorar grupos</a>
+    </div>
+    <div class="research-item">
+      <h3>Sostenibilidad Digital</h3>
+      <p>Green computing, smart cities, IoT sostenible, eficiencia energética</p>
+      <a href="#">Explorar grupos</a>
+    </div>
+    <div class="research-item">
+      <h3>Salud y Tecnología</h3>
+      <p>Bioinformática, diagnóstico asistido, datos sanitarios, health tech</p>
+      <a href="#">Explorar grupos</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STUDENT STORIES ===== -->
+<section class="section stories-section">
+  <div class="section-header">
+    <div class="section-label">Personas</div>
+    <div class="section-title">Student Stories</div>
+    <div class="section-desc">Personas reales. Experiencias reales.</div>
+  </div>
+  <div class="stories-grid">
+    <div class="story">
+      <div class="story-img img-placeholder">📷 María</div>
+      <div class="story-body">
+        <p class="story-quote">Me encanta el ambiente de la escuela. Los profesores están actualizados y las prácticas me abrieron las puertas al sector tech.</p>
+        <div class="story-person">María García</div>
+        <div class="story-detail">Grado en Ingeniería Informática · 4º curso</div>
+      </div>
+    </div>
+    <div class="story">
+      <div class="story-img img-placeholder">📷 Carlos</div>
+      <div class="story-body">
+        <p class="story-quote">El Máster me dio una base teórica brutal. Ahora trabajo en un equipo de investigación en NLP que publica en las mejores conferencias.</p>
+        <div class="story-person">Carlos Rodríguez</div>
+        <div class="story-detail">Máster en Ingeniería Informática · Alumni 2024</div>
+      </div>
+    </div>
+    <div class="story">
+      <div class="story-img img-placeholder">📷 Ana</div>
+      <div class="story-body">
+        <p class="story-quote">Estudiar aquí y hacer Erasmus me abrió la puerta a trabajar en Google. La formación técnica es de primer nivel.</p>
+        <div class="story-person">Ana López</div>
+        <div class="story-detail">Alumni · Software Engineer @ Google · 2022</div>
+      </div>
+    </div>
+  </div>
+  <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+</section>
+
+<!-- ===== NOTICIAS ===== -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Actualidad</div>
+    <div class="section-title">Noticias y Eventos</div>
+  </div>
+  <div class="news-grid">
+    <div class="news-featured">
+      <div class="news-img img-placeholder">📷 Imagen noticia</div>
+      <div class="news-content">
+        <span class="news-tag">Investigación</span>
+        <h3>Grupo de IA de la ETSIINF publica en NeurIPS 2026</h3>
+        <p>El equipo liderado por la profesora Martínez presenta un nuevo modelo de atención eficiente para transformers con aplicaciones en procesamiento de lenguaje natural.</p>
+        <span class="news-date">15 marzo 2026</span>
+      </div>
+    </div>
+    <div>
+      <div class="news-small">
+        <span class="news-tag">Estudios</span>
+        <h4>Abierta la preinscripción para el curso 2026-2027</h4>
+        <span class="news-date">12 marzo 2026</span>
+      </div>
+      <div class="news-small" style="margin-top:16px">
+        <span class="news-tag">Igualdad</span>
+        <h4>Jornada de mujeres en STEM: charlas y mesas redondas</h4>
+        <span class="news-date">8 marzo 2026</span>
+      </div>
+      <div class="news-small" style="margin-top:16px;border-bottom:none">
+        <span class="news-tag">Empleo</span>
+        <h4>Feria de empleo tech con +30 empresas en la ETSIINF</h4>
+        <span class="news-date">2 marzo 2026</span>
+      </div>
+    </div>
+    <div class="events-col">
+      <h3>Eventos</h3>
+      <div class="event">
+        <div class="event-date">25</div>
+        <span class="event-month">Marzo 2026</span>
+        <h4>Jornada de Puertas Abiertas</h4>
+        <p>10:00 – 14:00 · Campus Moncloa</p>
+      </div>
+      <div class="event">
+        <div class="event-date">3</div>
+        <span class="event-month">Abril 2026</span>
+        <h4>Hackathon ETSIINF</h4>
+        <p>48h · Abierto a todos los grados</p>
+      </div>
+      <div class="event" style="border-bottom:none;padding-bottom:0;margin-bottom:0">
+        <div class="event-date">15</div>
+        <span class="event-month">Abril 2026</span>
+        <h4>Feria de empleo tech</h4>
+        <p>+30 empresas · Sala de actos</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">ETSIINF</div>
+      <div class="footer-brand-sub">Escuela Técnica Superior de Ingeniería Informática<br>Universidad Politécnica de Madrid<br>Campus Moncloa · Madrid</div>
+      <div class="footer-social" style="margin-top:16px">
+        <a href="#">Twitter</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Instagram</a>
+        <a href="#">YouTube</a>
+      </div>
+    </div>
+    <div>
+      <h4>Estudios</h4>
+      <a href="#">Grados</a>
+      <a href="#">Másteres</a>
+      <a href="#">Doctorado</a>
+      <a href="#">Títulos propios</a>
+      <a href="#">Calendario</a>
+    </div>
+    <div>
+      <h4>Servicios UPM</h4>
+      <a href="#">Politécnica Virtual</a>
+      <a href="#">Moodle UPM</a>
+      <a href="#">Correo UPM</a>
+      <a href="#">Biblioteca</a>
+      <a href="#">GATE</a>
+    </div>
+    <div>
+      <h4>Servicios ETSIINF</h4>
+      <a href="#">Intranet (SIU) 🔒</a>
+      <a href="#">Gestor incidencias</a>
+      <a href="#">Reserva de salas</a>
+      <a href="#">Red local</a>
+      <a href="#">Directorio</a>
+    </div>
+  </div>
+  <hr class="footer-divider">
+  <div class="footer-bottom">
+    <div style="display:flex;gap:12px;align-items:center">
+      <a class="footer-a11y" href="#">Declaración de Accesibilidad</a>
+      <a href="#" style="color:var(--gray-500);text-decoration:none">Aviso legal</a>
+      <a href="#" style="color:var(--gray-500);text-decoration:none">Privacidad</a>
+      <a href="#" style="color:var(--gray-500);text-decoration:none">Cookies</a>
+    </div>
+    <div>© 2026 ETSIINF — UPM</div>
+  </div>
+</footer>
+
+</body>
+</html>

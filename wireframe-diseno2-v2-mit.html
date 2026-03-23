@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireframe — Diseño 2 v2: Estilo MIT EECS</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Patrick+Hand&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --font:'Architects Daughter','Comic Sans MS',cursive;
+  --font2:'Patrick Hand','Comic Sans MS',cursive;
+  --black:#111;
+  --white:#fff;
+  --bg:#fafafa;
+  --gray-50:#f6f6f4;
+  --gray-100:#edede9;
+  --gray-200:#ddddd7;
+  --gray-300:#c0c0b8;
+  --gray-400:#8e8e86;
+  --gray-500:#6a6a63;
+  --gray-600:#4a4a45;
+  --red:#a31f34;
+  --red-light:#fdf2f4;
+  --red-dark:#7a1728;
+  --img-bg:#e2e2da;
+  --radius:4px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--white);color:var(--black);line-height:1.5;max-width:1200px;margin:0 auto;border:2px solid var(--gray-200)}
+
+.img-placeholder{background:var(--img-bg);display:flex;align-items:center;justify-content:center;color:var(--gray-500);font-size:13px;position:relative;overflow:hidden}
+.img-placeholder::before,.img-placeholder::after{content:'';position:absolute;background:var(--gray-300);opacity:.35}
+.img-placeholder::before{width:141%;height:1px;top:50%;left:-20%;transform:rotate(45deg)}
+.img-placeholder::after{width:141%;height:1px;top:50%;left:-20%;transform:rotate(-45deg)}
+
+.title-bar{background:var(--red-dark);color:var(--white);text-align:center;padding:8px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
+
+/* ===== HEADER — MIT style: institutional bar + department identity ===== */
+.header{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--gray-200)}
+.header-inst{background:var(--black);color:var(--gray-300);display:flex;justify-content:space-between;align-items:center;padding:6px 40px;font-size:11px}
+.header-inst a{color:var(--gray-300);text-decoration:none;margin-right:16px}
+.header-inst a:hover{color:var(--white)}
+.audience-bar{display:flex;gap:0}
+.audience-bar a{padding:4px 14px;font-size:11px;text-decoration:none;color:var(--gray-300);border-left:1px solid #333}
+.audience-bar a:first-child{border-left:none}
+.audience-bar a:hover{color:var(--white)}
+.audience-bar a:first-child{color:var(--red);font-weight:bold;color:#f4a0a0}
+
+.header-main{display:flex;justify-content:space-between;align-items:center;padding:14px 40px}
+.logo-area{display:flex;align-items:center;gap:16px}
+.logo-mark{display:flex;flex-direction:column;gap:2px}
+.logo-mark-box{width:52px;height:52px;background:var(--red);border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--white);font-size:10px;font-weight:bold;line-height:1.1;text-align:center}
+.logo-identity{font-family:var(--font2);line-height:1.15}
+.logo-identity .dept-name{font-size:22px;font-weight:bold;letter-spacing:-.5px}
+.logo-identity .dept-areas{display:flex;gap:0;margin-top:2px}
+.logo-identity .dept-areas span{font-size:11px;color:var(--gray-500);padding-right:10px;border-right:1px solid var(--gray-200);margin-right:10px}
+.logo-identity .dept-areas span:last-child{border-right:none;margin-right:0;padding-right:0}
+
+.nav-main{display:flex;gap:0;align-items:center}
+.nav-main a{text-decoration:none;color:var(--black);font-size:14px;padding:10px 16px;position:relative;transition:.15s}
+.nav-main a::after{content:'';position:absolute;bottom:0;left:16px;right:16px;height:3px;background:transparent}
+.nav-main a:hover{background:var(--gray-50)}
+.nav-main a:hover::after{background:var(--red)}
+
+.header-right{display:flex;align-items:center;gap:16px}
+.search-input{border:2px solid var(--gray-200);border-radius:var(--radius);padding:8px 14px;font-family:var(--font);font-size:13px;color:var(--gray-500);width:200px;transition:.2s}
+.search-input:focus{border-color:var(--red);outline:none;width:240px}
+
+/* ===== HERO — MIT EECS: confident tagline + 3-area identity ===== */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--gray-200)}
+.hero-bg{position:absolute;inset:0}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,10,10,.88) 0%,rgba(20,20,20,.75) 100%)}
+.hero-inner{position:relative;z-index:2;padding:72px 40px 64px}
+.hero-label{font-size:12px;color:var(--gray-300);text-transform:uppercase;letter-spacing:2px;margin-bottom:20px}
+.hero h1{font-family:var(--font2);font-size:52px;color:var(--white);margin-bottom:12px;line-height:1.05;letter-spacing:-1px;max-width:700px}
+.hero h1 em{font-style:normal;color:#f4a0a0}
+.hero-sub{font-size:16px;color:#aaa;margin-bottom:48px;max-width:560px;line-height:1.6}
+
+.hero-areas{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid rgba(255,255,255,.15);border-radius:var(--radius);overflow:hidden}
+.hero-area{padding:32px 28px;border-right:1px solid rgba(255,255,255,.1);position:relative;transition:.2s;cursor:pointer}
+.hero-area:last-child{border-right:none}
+.hero-area:hover{background:rgba(255,255,255,.06)}
+.hero-area-num{font-size:11px;color:var(--gray-400);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;display:block}
+.hero-area h3{color:var(--white);font-size:18px;margin-bottom:8px;line-height:1.2}
+.hero-area p{color:#999;font-size:13px;line-height:1.5;margin-bottom:14px}
+.hero-area a{font-size:13px;color:#f4a0a0;text-decoration:none;font-weight:bold}
+.hero-area a:hover{color:var(--white)}
+.hero-area a::after{content:' →'}
+.area-bar{position:absolute;top:0;left:0;right:0;height:3px}
+.hero-area:nth-child(1) .area-bar{background:var(--red)}
+.hero-area:nth-child(2) .area-bar{background:#6ba4d9}
+.hero-area:nth-child(3) .area-bar{background:#e8a838}
+
+/* ===== SECTION SYSTEM ===== */
+.section{padding:64px 40px;border-top:1px solid var(--gray-200)}
+.section-header{margin-bottom:40px;max-width:600px}
+.section-label{font-size:12px;color:var(--gray-400);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px}
+.section-title{font-family:var(--font2);font-size:30px;letter-spacing:-.5px;line-height:1.15;margin-bottom:8px}
+.section-desc{font-size:15px;color:var(--gray-500);line-height:1.5}
+
+/* ===== RESEARCH — MIT 3 macro + 25 sub-areas ===== */
+.research-macro{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--gray-200);border-radius:var(--radius);overflow:hidden;margin-bottom:32px}
+.research-macro-item{padding:28px 24px;border-right:1px solid var(--gray-200)}
+.research-macro-item:last-child{border-right:none}
+.research-macro-item h3{font-size:16px;margin-bottom:6px}
+.research-macro-item p{font-size:13px;color:var(--gray-500);line-height:1.4;margin-bottom:12px}
+.rmi-bar{width:40px;height:3px;margin-bottom:14px}
+.rmi-bar-1{background:var(--red)}
+.rmi-bar-2{background:#6ba4d9}
+.rmi-bar-3{background:#e8a838}
+.sub-areas{display:flex;flex-wrap:wrap;gap:6px}
+.sub-area{font-size:11px;padding:4px 10px;border:1px solid var(--gray-200);border-radius:20px;color:var(--gray-500);cursor:pointer;transition:.15s}
+.sub-area:hover{border-color:var(--black);color:var(--black)}
+
+.research-explore{text-align:center;padding-top:8px}
+.research-explore a{font-size:14px;color:var(--black);text-decoration:none;font-weight:bold}
+.research-explore a:hover{color:var(--red)}
+.research-explore a::after{content:' →'}
+
+/* ===== COMMUNITY & BELONGING — MIT first-class section ===== */
+.community-section{background:var(--gray-50)}
+.community-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.community-card{display:flex;gap:18px;padding:24px;border:1px solid var(--gray-200);border-radius:var(--radius);background:var(--white);align-items:flex-start;transition:.15s}
+.community-card:hover{border-color:var(--red)}
+.comm-icon{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;border:2px solid var(--gray-200);background:var(--white)}
+.community-card h3{font-size:15px;margin-bottom:4px}
+.community-card p{font-size:13px;color:var(--gray-500);line-height:1.4}
+
+/* ===== WHY ETSIINF — compact row ===== */
+.why-row{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.why-item{text-align:center;padding:20px 12px;border:1px solid var(--gray-200);border-radius:var(--radius);background:var(--white);transition:.15s;cursor:pointer}
+.why-item:hover{border-color:var(--red);transform:translateY(-2px)}
+.why-icon{width:48px;height:48px;border-radius:50%;margin:0 auto 10px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;font-size:20px}
+.why-item h4{font-size:13px;margin-bottom:4px}
+.why-item p{font-size:11px;color:var(--gray-500);line-height:1.4}
+
+/* ===== NEWS — MIT editorial grid ===== */
+.news-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px}
+.news-card{border:1px solid var(--gray-200);border-radius:var(--radius);overflow:hidden;transition:.15s}
+.news-card:hover{border-color:var(--gray-400)}
+.news-card:first-child{grid-column:span 2;grid-row:span 2}
+.news-card:first-child .news-img{height:280px}
+.news-img{height:140px;border-bottom:1px solid var(--gray-200)}
+.news-content{padding:20px}
+.news-tag{font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;display:block}
+.news-card:nth-child(1) .news-tag{color:var(--red)}
+.news-card:nth-child(2) .news-tag{color:#6ba4d9}
+.news-card:nth-child(3) .news-tag{color:#e8a838}
+.news-card:nth-child(4) .news-tag{color:var(--gray-400)}
+.news-card h3{font-size:18px;margin-bottom:6px;line-height:1.25}
+.news-card h4{font-size:15px;margin-bottom:4px;line-height:1.3}
+.news-card p{font-size:13px;color:var(--gray-500);line-height:1.5}
+.news-date{font-size:11px;color:var(--gray-400);margin-top:8px;display:block}
+
+/* ===== ENGAGE — MIT Alliance/Alumni/Giving ===== */
+.engage-row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.engage-card{padding:28px 20px;border:1px solid var(--gray-200);border-radius:var(--radius);text-align:center;transition:.15s;cursor:pointer}
+.engage-card:hover{border-color:var(--red);background:var(--red-light)}
+.engage-icon{font-size:28px;margin-bottom:12px;display:block}
+.engage-card h3{font-size:15px;margin-bottom:4px}
+.engage-card p{font-size:12px;color:var(--gray-500);line-height:1.4}
+
+/* ===== FOOTER — MIT: institutional, black ===== */
+.footer{background:var(--black);color:var(--gray-300);padding:48px 40px 28px}
+.footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr;gap:32px;margin-bottom:32px}
+.footer h4{color:var(--white);font-size:12px;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px}
+.footer a{color:var(--gray-400);text-decoration:none;display:block;margin-bottom:5px;font-size:12px}
+.footer a:hover{color:var(--white)}
+.footer-brand{font-family:var(--font2);font-size:20px;color:var(--white);margin-bottom:4px}
+.footer-brand-sub{font-size:12px;color:var(--gray-500);line-height:1.5;max-width:260px;margin-bottom:12px}
+.footer-brand-areas{display:flex;gap:0;margin-bottom:16px}
+.footer-brand-areas span{font-size:10px;color:var(--gray-400);padding-right:8px;border-right:1px solid #444;margin-right:8px}
+.footer-brand-areas span:last-child{border:none;margin:0;padding:0}
+.footer-social{display:flex;gap:14px;margin-top:4px}
+.footer-social a{color:var(--gray-500);font-size:12px}
+.footer-social a:hover{color:var(--white)}
+.footer-divider{border:none;border-top:1px solid #333;margin:0 0 16px}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--gray-500)}
+.footer-a11y{background:#222;padding:5px 14px;border-radius:3px;color:var(--gray-300);text-decoration:none;font-size:11px;border:1px solid #444}
+.footer-a11y:hover{background:#333;color:var(--white)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:960px){
+  .hero-areas,.research-macro{grid-template-columns:1fr}
+  .hero-area{border-right:none;border-bottom:1px solid rgba(255,255,255,.1)}
+  .research-macro-item{border-right:none;border-bottom:1px solid var(--gray-200)}
+  .news-row{grid-template-columns:1fr}
+  .news-card:first-child{grid-column:span 1;grid-row:span 1}
+  .community-grid{grid-template-columns:1fr}
+  .why-row{grid-template-columns:repeat(3,1fr)}
+  .engage-row{grid-template-columns:repeat(2,1fr)}
+  .footer-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .hero-inner{padding:48px 24px}
+  .hero h1{font-size:36px}
+  .section{padding:48px 24px}
+  .header-main{padding:12px 16px}
+  .header-inst{padding:6px 16px}
+  .nav-main{display:none}
+  .why-row{grid-template-columns:repeat(2,1fr)}
+  .engage-row{grid-template-columns:1fr}
+  .footer{padding:40px 24px 24px}
+  .footer-top{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="title-bar">WIREFRAME — DISEÑO 2 v2: ESTILO MIT EECS &nbsp;·&nbsp; Bold identity · Research-driven · Community · 3-area split</div>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="header-inst">
+    <div>
+      <a href="#">⇥ Skip to content</a>
+      <a href="#">UPM</a>
+      <a href="#">ES</a>
+      <a href="#">EN</a>
+    </div>
+    <div class="audience-bar">
+      <a href="#">Futuro Estudiante</a>
+      <a href="#">Estudiante</a>
+      <a href="#">PDI / PTGAS</a>
+      <a href="#">Alumni</a>
+      <a href="#">Empresa</a>
+    </div>
+  </div>
+  <div class="header-main">
+    <div class="logo-area">
+      <div class="logo-mark-box">ETSI<br>INF</div>
+      <div class="logo-identity">
+        <div class="dept-name">ETSIINF</div>
+        <div class="dept-areas">
+          <span>Ingeniería Informática</span>
+          <span>Ciencia de Datos e IA</span>
+          <span>Matemáticas</span>
+        </div>
+      </div>
+    </div>
+    <nav class="nav-main">
+      <a href="#">Academics</a>
+      <a href="#">Research</a>
+      <a href="#">People</a>
+      <a href="#">Community</a>
+      <a href="#">News</a>
+      <a href="#">About</a>
+    </nav>
+    <div class="header-right">
+      <input class="search-input" type="text" placeholder="🔍 Search ETSIINF...">
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-bg img-placeholder" style="height:100%;border:none;border-radius:0">📷 Campus editorial</div>
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <div class="hero-label">Escuela Técnica Superior de Ingeniería Informática · UPM</div>
+    <h1>ETSIINF es donde se <em>inventa</em> el futuro digital</h1>
+    <p class="hero-sub">Tres áreas de conocimiento, una misión: formar a los profesionales que liderarán la transformación tecnológica de la sociedad.</p>
+    <div class="hero-areas">
+      <div class="hero-area">
+        <div class="area-bar"></div>
+        <span class="hero-area-num">Área 1</span>
+        <h3>Ingeniería Informática</h3>
+        <p>Software, sistemas, arquitectura de computadores, redes y seguridad</p>
+        <a href="#">Explorar programas</a>
+      </div>
+      <div class="hero-area">
+        <div class="area-bar"></div>
+        <span class="hero-area-num">Área 2</span>
+        <h3>Ciencia de Datos e IA</h3>
+        <p>Machine learning, análisis de datos, inteligencia artificial, NLP, visión</p>
+        <a href="#">Explorar programas</a>
+      </div>
+      <div class="hero-area">
+        <div class="area-bar"></div>
+        <span class="hero-area-num">Área 3</span>
+        <h3>Matemáticas e Informática</h3>
+        <p>Fundamentos matemáticos, computación teórica, criptografía, algoritmos</p>
+        <a href="#">Explorar programas</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RESEARCH ===== -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Research</div>
+    <div class="section-title">Explore all research areas</div>
+    <div class="section-desc">Investigación de impacto organizada en tres grandes ejes y más de 20 áreas específicas.</div>
+  </div>
+  <div class="research-macro">
+    <div class="research-macro-item">
+      <div class="rmi-bar rmi-bar-1"></div>
+      <h3>Ingeniería Informática</h3>
+      <p>Sistemas, software, arquitectura, redes</p>
+      <div class="sub-areas">
+        <span class="sub-area">Ing. Software</span>
+        <span class="sub-area">Sist. Distribuidos</span>
+        <span class="sub-area">Cloud</span>
+        <span class="sub-area">Redes</span>
+        <span class="sub-area">HPC</span>
+        <span class="sub-area">IoT</span>
+        <span class="sub-area">DevOps</span>
+      </div>
+    </div>
+    <div class="research-macro-item">
+      <div class="rmi-bar rmi-bar-2"></div>
+      <h3>Ciencia de Datos e IA</h3>
+      <p>ML, NLP, visión, IA explicable, recomendadores</p>
+      <div class="sub-areas">
+        <span class="sub-area">Deep Learning</span>
+        <span class="sub-area">NLP</span>
+        <span class="sub-area">Visión Artificial</span>
+        <span class="sub-area">IA Explicable</span>
+        <span class="sub-area">Big Data</span>
+        <span class="sub-area">Robótica</span>
+        <span class="sub-area">IA + Salud</span>
+        <span class="sub-area">IA + Sociedad</span>
+      </div>
+    </div>
+    <div class="research-macro-item">
+      <div class="rmi-bar rmi-bar-3"></div>
+      <h3>Matemáticas y Computación</h3>
+      <p>Algoritmos, criptografía, computación cuántica</p>
+      <div class="sub-areas">
+        <span class="sub-area">Algoritmos</span>
+        <span class="sub-area">Criptografía</span>
+        <span class="sub-area">Computación Cuántica</span>
+        <span class="sub-area">Optimización</span>
+        <span class="sub-area">Fintech</span>
+        <span class="sub-area">Ciberseguridad</span>
+      </div>
+    </div>
+  </div>
+  <div class="research-explore">
+    <a href="#">Explorar los +40 grupos de investigación</a>
+  </div>
+</section>
+
+<!-- ===== COMMUNITY & BELONGING ===== -->
+<section class="section community-section">
+  <div class="section-header">
+    <div class="section-label">Community & Belonging</div>
+    <div class="section-title">Una escuela diversa e inclusiva</div>
+    <div class="section-desc">Recursos, programas y espacios para toda la comunidad ETSIINF.</div>
+  </div>
+  <div class="community-grid">
+    <div class="community-card">
+      <div class="comm-icon">⚖️</div>
+      <div>
+        <h3>Espacio de Igualdad</h3>
+        <p>Plan de igualdad, protocolos contra acoso, recursos y orientación para toda la comunidad universitaria</p>
+      </div>
+    </div>
+    <div class="community-card">
+      <div class="comm-icon">♿</div>
+      <div>
+        <h3>Diversidad e Inclusión</h3>
+        <p>Accesibilidad, atención a la discapacidad, programas de apoyo y adaptación curricular</p>
+      </div>
+    </div>
+    <div class="community-card">
+      <div class="comm-icon">🎓</div>
+      <div>
+        <h3>Delegación de Estudiantes</h3>
+        <p>Representación estudiantil activa. Participación en órganos de gobierno de la escuela</p>
+      </div>
+    </div>
+    <div class="community-card">
+      <div class="comm-icon">🤝</div>
+      <div>
+        <h3>Asociaciones y Vida Universitaria</h3>
+        <p>Robótica, software libre, competiciones, gaming, cultura — más de 10 asociaciones</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ¿POR QUÉ ETSIINF? — compact ===== -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Why ETSIINF?</div>
+    <div class="section-title">¿Por qué elegirnos?</div>
+  </div>
+  <div class="why-row">
+    <div class="why-item">
+      <div class="why-icon">🏛</div>
+      <h4>Campus</h4>
+      <p>Moncloa, Madrid. Instalaciones de vanguardia</p>
+    </div>
+    <div class="why-item">
+      <div class="why-icon">📊</div>
+      <h4>98% Empleo</h4>
+      <p>Empleabilidad líder en ingenierías</p>
+    </div>
+    <div class="why-item">
+      <div class="why-icon">🏆</div>
+      <h4>Rankings</h4>
+      <p>Top CS en España (QS, THE)</p>
+    </div>
+    <div class="why-item">
+      <div class="why-icon">🌍</div>
+      <h4>Internacional</h4>
+      <p>Erasmus+, EIT Digital, dobles títulos</p>
+    </div>
+    <div class="why-item">
+      <div class="why-icon">🔬</div>
+      <h4>+50 años</h4>
+      <p>Referente en investigación e innovación</p>
+    </div>
+    <div class="why-item">
+      <div class="why-icon">🏙</div>
+      <h4>Madrid</h4>
+      <p>Capital tech, hub startups y empresas</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== NEWS ===== -->
+<section class="section" style="background:var(--gray-50)">
+  <div class="section-header">
+    <div class="section-label">News & Events</div>
+    <div class="section-title">Noticias y eventos</div>
+  </div>
+  <div class="news-row">
+    <div class="news-card">
+      <div class="news-img img-placeholder">📷 Destacada</div>
+      <div class="news-content">
+        <span class="news-tag">Investigación</span>
+        <h3>Grupo de IA de la ETSIINF publica en NeurIPS 2026</h3>
+        <p>El equipo liderado por la profesora Martínez presenta un nuevo modelo de atención eficiente para transformers con aplicaciones en NLP y visión artificial.</p>
+        <span class="news-date">15 marzo 2026</span>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="news-img img-placeholder">📷</div>
+      <div class="news-content">
+        <span class="news-tag">Estudios</span>
+        <h4>Preinscripción abierta 2026-2027</h4>
+        <p>Nuevas plazas en Ciencia de Datos e IA</p>
+        <span class="news-date">12 marzo 2026</span>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="news-img img-placeholder">📷</div>
+      <div class="news-content">
+        <span class="news-tag">Community</span>
+        <h4>Jornada de mujeres en STEM</h4>
+        <p>Charlas y mesas redondas</p>
+        <span class="news-date">8 marzo 2026</span>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="news-content" style="padding:16px">
+        <span class="news-tag">Empleo</span>
+        <h4>Feria de empleo tech 2026</h4>
+        <p>+30 empresas · 15 abril · Sala de actos</p>
+        <span class="news-date">2 marzo 2026</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ENGAGE ===== -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Engage</div>
+    <div class="section-title">Conecta con la ETSIINF</div>
+  </div>
+  <div class="engage-row">
+    <div class="engage-card">
+      <span class="engage-icon">🤝</span>
+      <h3>Empresas</h3>
+      <p>Cátedras, prácticas, colaboración con la industria</p>
+    </div>
+    <div class="engage-card">
+      <span class="engage-icon">🎓</span>
+      <h3>Alumni</h3>
+      <p>Red de egresados, mentoring, eventos</p>
+    </div>
+    <div class="engage-card">
+      <span class="engage-icon">🌐</span>
+      <h3>Erasmus y Movilidad</h3>
+      <p>Programas internacionales, dobles títulos</p>
+    </div>
+    <div class="engage-card">
+      <span class="engage-icon">💼</span>
+      <h3>Empleo</h3>
+      <p>Bolsa de empleo, ferias, formación para inserción</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">ETSIINF</div>
+      <div class="footer-brand-areas">
+        <span>Ing. Informática</span>
+        <span>Ciencia Datos e IA</span>
+        <span>Matemáticas</span>
+      </div>
+      <div class="footer-brand-sub">Escuela Técnica Superior de Ingeniería Informática<br>Universidad Politécnica de Madrid<br>Campus Moncloa · Madrid</div>
+      <div class="footer-social">
+        <a href="#">Twitter</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Instagram</a>
+        <a href="#">YouTube</a>
+      </div>
+    </div>
+    <div>
+      <h4>Estudios</h4>
+      <a href="#">Grados</a>
+      <a href="#">Másteres</a>
+      <a href="#">Doctorado</a>
+      <a href="#">Títulos propios</a>
+      <a href="#">Calendario</a>
+    </div>
+    <div>
+      <h4>Investigación</h4>
+      <a href="#">Áreas</a>
+      <a href="#">Grupos</a>
+      <a href="#">Cátedras</a>
+      <a href="#">Proyectos</a>
+      <a href="#">Publicaciones</a>
+    </div>
+    <div>
+      <h4>Servicios UPM</h4>
+      <a href="#">Politécnica Virtual</a>
+      <a href="#">Moodle UPM</a>
+      <a href="#">Correo UPM</a>
+      <a href="#">Biblioteca</a>
+      <a href="#">GATE</a>
+    </div>
+    <div>
+      <h4>Servicios ETSIINF</h4>
+      <a href="#">Intranet (SIU) 🔒</a>
+      <a href="#">Incidencias</a>
+      <a href="#">Reserva de salas</a>
+      <a href="#">Red local</a>
+      <a href="#">Directorio</a>
+    </div>
+  </div>
+  <hr class="footer-divider">
+  <div class="footer-bottom">
+    <div style="display:flex;gap:12px;align-items:center">
+      <a class="footer-a11y" href="#">Declaración de Accesibilidad</a>
+      <a href="#" style="color:var(--gray-500);text-decoration:none">Aviso legal</a>
+      <a href="#" style="color:var(--gray-500);text-decoration:none">Privacidad</a>
+      <a href="#" style="color:var(--gray-500);text-decoration:none">Cookies</a>
+    </div>
+    <div>© 2026 ETSIINF — UPM</div>
+  </div>
+</footer>
+
+</body>
+</html>

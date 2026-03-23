@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireframe Baja Fidelidad — Diseño 1: Captación + Comunidad</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Patrick+Hand&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --font:'Architects Daughter','Comic Sans MS',cursive;
+  --font2:'Patrick Hand','Comic Sans MS',cursive;
+  --bg:#f5f5f0;
+  --wire:#e0e0d8;
+  --border:#999;
+  --text:#444;
+  --light-text:#888;
+  --accent:#6ba4d9;
+  --accent2:#4a90c4;
+  --cta:#f4a940;
+  --cta-dark:#c48520;
+  --img-bg:#d5d5cc;
+  --card-bg:#fff;
+  --section-bg:#eeeee8;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.5;max-width:1200px;margin:0 auto;border:3px solid var(--border);border-radius:4px;position:relative}
+
+/* Sketch-style borders */
+.sketch{border:2px solid var(--border);border-radius:3px}
+.sketch-dashed{border:2px dashed var(--border);border-radius:3px}
+.img-placeholder{background:var(--img-bg);display:flex;align-items:center;justify-content:center;color:var(--light-text);font-size:14px;position:relative;overflow:hidden}
+.img-placeholder::before,.img-placeholder::after{content:'';position:absolute;background:var(--border);opacity:.3}
+.img-placeholder::before{width:141%;height:2px;top:50%;left:-20%;transform:rotate(45deg)}
+.img-placeholder::after{width:141%;height:2px;top:50%;left:-20%;transform:rotate(-45deg)}
+
+.badge{display:inline-block;font-size:11px;background:var(--wire);padding:2px 8px;border-radius:10px;color:var(--light-text);border:1px solid var(--border)}
+.btn{display:inline-block;padding:8px 20px;border:2px solid var(--border);border-radius:4px;font-family:var(--font);cursor:pointer;text-align:center;font-size:14px}
+.btn-primary{background:var(--cta);border-color:var(--cta-dark);color:#fff}
+.btn-outline{background:transparent}
+.annotation{position:absolute;font-family:var(--font2);font-size:12px;color:#c44;transform:rotate(-3deg);background:#fff8e0;padding:2px 8px;border:1px solid #e8c;border-radius:2px;z-index:10;white-space:nowrap}
+
+/* Title bar */
+.title-bar{background:#333;color:#fff;text-align:center;padding:8px;font-size:12px;letter-spacing:1px}
+
+/* ===== HEADER ===== */
+.header{padding:12px 24px;border-bottom:2px solid var(--border);background:var(--card-bg);position:sticky;top:0;z-index:100}
+.header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:12px;color:var(--light-text);border-bottom:1px dashed var(--wire);padding-bottom:6px}
+.profile-selector{display:flex;gap:12px}
+.profile-selector span{padding:3px 10px;border:1px solid var(--border);border-radius:12px;font-size:11px;cursor:pointer}
+.profile-selector span:first-child{background:var(--accent);color:#fff;border-color:var(--accent2)}
+.header-main{display:flex;justify-content:space-between;align-items:center}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-box{width:44px;height:44px;border:2px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:bold;text-align:center;line-height:1.1}
+.logo-text{font-size:16px;font-weight:bold;line-height:1.2}
+.logo-text small{font-size:10px;color:var(--light-text);font-weight:normal;display:block}
+nav{display:flex;gap:20px;font-size:14px}
+nav a{text-decoration:none;color:var(--text);padding:4px 0;border-bottom:2px solid transparent}
+nav a:hover{border-bottom-color:var(--accent)}
+.header-right{display:flex;align-items:center;gap:12px}
+.cta-header{background:var(--cta);color:#fff;border:2px solid var(--cta-dark);padding:8px 16px;border-radius:4px;font-family:var(--font);font-size:13px;font-weight:bold;cursor:pointer}
+.lang-switch{font-size:12px;border:1px solid var(--border);padding:3px 8px;border-radius:3px}
+.a11y-btn{font-size:11px;border:1px solid var(--border);padding:3px 8px;border-radius:3px;cursor:pointer}
+
+/* ===== HERO ===== */
+.hero{position:relative;padding:60px 48px;background:linear-gradient(135deg,#e8eef5 0%,#dde6f0 100%);border-bottom:2px solid var(--border);min-height:420px;display:flex;align-items:center}
+.hero-content{flex:1;max-width:55%;position:relative;z-index:2}
+.hero h1{font-family:var(--font2);font-size:36px;line-height:1.2;margin-bottom:16px;color:#333}
+.hero p{font-size:16px;color:var(--light-text);margin-bottom:24px;max-width:460px}
+.hero-stats{display:flex;gap:24px;margin-bottom:28px}
+.stat{text-align:center;padding:12px 16px;background:var(--card-bg);border:2px solid var(--border);border-radius:6px;min-width:100px}
+.stat-num{font-size:28px;font-weight:bold;color:var(--accent2);display:block;line-height:1}
+.stat-label{font-size:11px;color:var(--light-text);margin-top:4px;display:block}
+.hero-image{position:absolute;right:24px;top:24px;bottom:24px;width:40%;border-radius:8px}
+
+/* ===== ESTUDIOS ===== */
+.section{padding:48px 36px;border-bottom:2px solid var(--border)}
+.section-alt{background:var(--section-bg)}
+.section-title{font-family:var(--font2);font-size:24px;margin-bottom:6px;color:#333}
+.section-subtitle{font-size:14px;color:var(--light-text);margin-bottom:24px}
+.filter-bar{display:flex;gap:8px;margin-bottom:24px}
+.filter-bar span{padding:6px 16px;border:2px solid var(--border);border-radius:20px;font-size:13px;cursor:pointer}
+.filter-bar span:first-child{background:var(--accent);color:#fff;border-color:var(--accent2)}
+.cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:var(--card-bg);border:2px solid var(--border);border-radius:6px;padding:16px;position:relative}
+.card-badge{position:absolute;top:-8px;right:12px;font-size:10px;background:var(--cta);color:#fff;padding:2px 8px;border-radius:8px}
+.card h3{font-size:15px;margin-bottom:4px}
+.card .meta{font-size:12px;color:var(--light-text);margin-bottom:8px}
+.card .meta span{display:block}
+.card .btn{width:100%;font-size:12px;padding:6px;margin-top:8px}
+
+/* ===== INVESTIGACIÓN ===== */
+.research-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.research-card{background:var(--card-bg);border:2px solid var(--border);border-radius:6px;padding:20px;text-align:center}
+.research-icon{width:56px;height:56px;margin:0 auto 12px;border:2px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;background:var(--wire)}
+.research-card h3{font-size:14px;margin-bottom:6px}
+.research-card p{font-size:12px;color:var(--light-text);line-height:1.4}
+
+/* ===== STUDENT STORIES ===== */
+.stories-container{display:flex;gap:24px;align-items:stretch}
+.story-card{flex:1;background:var(--card-bg);border:2px solid var(--border);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+.story-photo{height:140px}
+.story-content{padding:16px;flex:1;display:flex;flex-direction:column}
+.story-quote{font-size:14px;font-style:italic;color:var(--text);flex:1;margin-bottom:10px;line-height:1.5}
+.story-quote::before{content:'"';font-size:32px;color:var(--accent);line-height:0;vertical-align:-8px;margin-right:4px}
+.story-name{font-size:13px;font-weight:bold}
+.story-degree{font-size:11px;color:var(--light-text)}
+
+/* ===== NOTICIAS ===== */
+.news-layout{display:grid;grid-template-columns:2fr 1fr;gap:24px}
+.news-main .news-item{background:var(--card-bg);border:2px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:16px}
+.news-thumb{height:160px}
+.news-body{padding:16px}
+.news-body h3{font-size:16px;margin-bottom:6px}
+.news-body p{font-size:13px;color:var(--light-text)}
+.news-date{font-size:11px;color:var(--light-text);margin-bottom:4px}
+.news-small{margin-bottom:12px;padding-bottom:12px;border-bottom:1px dashed var(--wire)}
+.news-small h4{font-size:14px;margin-bottom:2px}
+.events-sidebar h3{font-size:16px;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--border)}
+.event-item{padding:12px;background:var(--card-bg);border:2px solid var(--border);border-radius:6px;margin-bottom:10px}
+.event-date-box{display:inline-block;background:var(--accent);color:#fff;padding:4px 10px;border-radius:4px;font-size:12px;margin-bottom:6px}
+.event-item h4{font-size:13px}
+.event-item p{font-size:11px;color:var(--light-text)}
+
+/* ===== FOOTER ===== */
+.footer{background:#444;color:#ccc;padding:36px;font-size:13px}
+.footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:24px}
+.footer h4{color:#fff;font-size:14px;margin-bottom:10px}
+.footer a{color:#aaa;text-decoration:none;display:block;margin-bottom:4px;font-size:12px}
+.footer-bottom{border-top:1px solid #666;padding-top:16px;display:flex;justify-content:space-between;align-items:center;font-size:11px}
+.footer-a11y{background:#555;padding:6px 12px;border-radius:4px;color:#fff;font-size:11px;text-decoration:none}
+
+/* Responsive */
+@media(max-width:900px){
+  .cards-grid,.research-grid{grid-template-columns:repeat(2,1fr)}
+  .stories-container{flex-direction:column}
+  .news-layout{grid-template-columns:1fr}
+  .hero-content{max-width:100%}
+  .hero-image{display:none}
+  .footer-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .cards-grid,.research-grid{grid-template-columns:1fr}
+  .hero-stats{flex-wrap:wrap;gap:12px}
+  nav{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="title-bar">WIREFRAME BAJA FIDELIDAD — DISEÑO 1: CAPTACIÓN + COMUNIDAD &nbsp;|&nbsp; Ref: TU Delft + Aalto + Deusto</div>
+
+<!-- ===== HEADER (patrón Aalto CTA + Deusto perfiles + TU Delft a11y) ===== -->
+<header class="header">
+  <div class="header-top">
+    <div style="display:flex;gap:6px;align-items:center">
+      <span class="a11y-btn">⇥ Skip to content</span>
+      <span class="a11y-btn">◐ Alto contraste</span>
+    </div>
+    <div class="profile-selector">
+      <span>Futuro Estudiante</span>
+      <span>Estudiante</span>
+      <span>PDI / PTGAS</span>
+      <span>Empresa</span>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span class="lang-switch">ES</span>
+      <span class="lang-switch">EN</span>
+    </div>
+  </div>
+  <div class="header-main">
+    <div class="logo">
+      <div class="logo-box">ETSI<br>INF</div>
+      <div class="logo-text">ETSIINF<small>Universidad Politécnica de Madrid</small></div>
+    </div>
+    <nav>
+      <a href="#">La Escuela</a>
+      <a href="#">Estudios</a>
+      <a href="#">Investigación</a>
+      <a href="#">Conecta</a>
+      <a href="#">Noticias</a>
+    </nav>
+    <div class="header-right">
+      <button class="cta-header">Estudia en la ETSIINF →</button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO (patrón MIT tagline + Deusto cifras + Aalto CTA) ===== -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="badge" style="margin-bottom:12px">Escuela de Ingeniería Informática · UPM</div>
+    <h1>Formamos a quienes crean el futuro digital</h1>
+    <p>La escuela de informática de referencia en Madrid. Más de 50 años formando ingenieros que transforman el mundo.</p>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">4</span><span class="stat-label">Grados</span></div>
+      <div class="stat"><span class="stat-num">6</span><span class="stat-label">Másteres</span></div>
+      <div class="stat"><span class="stat-num">98%</span><span class="stat-label">Empleabilidad</span></div>
+      <div class="stat"><span class="stat-num">+50</span><span class="stat-label">Años</span></div>
+    </div>
+    <div style="display:flex;gap:12px">
+      <button class="btn btn-primary" style="font-size:16px;padding:12px 28px">Descubre nuestros estudios →</button>
+      <button class="btn btn-outline">Solicita información</button>
+    </div>
+  </div>
+  <div class="hero-image img-placeholder" style="border:2px solid var(--border);border-radius:8px">
+    <span style="z-index:1;background:var(--img-bg);padding:4px 12px;border-radius:4px">📷 Foto humana campus<br>(no stock)</span>
+  </div>
+</section>
+
+<!-- ===== ESTUDIOS (patrón Stanford fichas detalladas) ===== -->
+<section class="section section-alt">
+  <div class="section-title">Estudios</div>
+  <div class="section-subtitle">Encuentra tu camino en la informática</div>
+  <div class="filter-bar">
+    <span>Todos</span>
+    <span>Grado</span>
+    <span>Máster</span>
+    <span>Doctorado</span>
+    <span>Título propio</span>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-badge">Grado</div>
+      <h3>Ingeniería Informática</h3>
+      <div class="meta">
+        <span>📅 4 años · 240 ECTS</span>
+        <span>📊 Nota corte: 10,2</span>
+        <span>🌐 ES / EN parcial</span>
+      </div>
+      <button class="btn btn-primary">Ver ficha →</button>
+    </div>
+    <div class="card">
+      <div class="card-badge">Grado</div>
+      <h3>Ciencia de Datos e IA</h3>
+      <div class="meta">
+        <span>📅 4 años · 240 ECTS</span>
+        <span>📊 Nota corte: 12,1</span>
+        <span>🌐 ES / EN parcial</span>
+      </div>
+      <button class="btn btn-primary">Ver ficha →</button>
+    </div>
+    <div class="card">
+      <div class="card-badge">Grado</div>
+      <h3>Matemáticas e Informática</h3>
+      <div class="meta">
+        <span>📅 5 años · 348 ECTS</span>
+        <span>📊 Nota corte: 13,1</span>
+        <span>🌐 ES</span>
+      </div>
+      <button class="btn btn-primary">Ver ficha →</button>
+    </div>
+    <div class="card">
+      <div class="card-badge">Doble Grado</div>
+      <h3>Ing. Informática + ADE</h3>
+      <div class="meta">
+        <span>📅 5,5 años · 366 ECTS</span>
+        <span>📊 Nota corte: 11,5</span>
+        <span>🌐 ES</span>
+      </div>
+      <button class="btn btn-primary">Ver ficha →</button>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:20px">
+    <button class="btn btn-outline">Ver todos los másteres y doctorado →</button>
+  </div>
+</section>
+
+<!-- ===== INVESTIGACIÓN POR IMPACTO (patrón TU Delft) ===== -->
+<section class="section">
+  <div class="section-title">Investigación</div>
+  <div class="section-subtitle">Nuestra investigación organizada por ejes de impacto social</div>
+  <div class="research-grid">
+    <div class="research-card">
+      <div class="research-icon">🧠</div>
+      <h3>IA y Sociedad</h3>
+      <p>Machine learning, NLP, visión artificial, ética en IA y su impacto en la sociedad</p>
+      <button class="btn btn-outline" style="margin-top:12px;font-size:12px">Explorar →</button>
+    </div>
+    <div class="research-card">
+      <div class="research-icon">🔐</div>
+      <h3>Ciberseguridad</h3>
+      <p>Criptografía, seguridad de redes, protección de datos y sistemas críticos</p>
+      <button class="btn btn-outline" style="margin-top:12px;font-size:12px">Explorar →</button>
+    </div>
+    <div class="research-card">
+      <div class="research-icon">🌱</div>
+      <h3>Sostenibilidad Digital</h3>
+      <p>Green computing, smart cities, eficiencia energética, IoT sostenible</p>
+      <button class="btn btn-outline" style="margin-top:12px;font-size:12px">Explorar →</button>
+    </div>
+    <div class="research-card">
+      <div class="research-icon">❤️</div>
+      <h3>Salud y Tecnología</h3>
+      <p>Health tech, bioinformática, diagnóstico asistido, datos sanitarios</p>
+      <button class="btn btn-outline" style="margin-top:12px;font-size:12px">Explorar →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STUDENT STORIES (patrón TU Delft Humans of EEMCS) ===== -->
+<section class="section section-alt">
+  <div class="section-title">Student Stories</div>
+  <div class="section-subtitle">Personas reales, experiencias reales</div>
+  <div class="stories-container">
+    <div class="story-card">
+      <div class="story-photo img-placeholder" style="border-bottom:2px solid var(--border)">📷 Foto María</div>
+      <div class="story-content">
+        <div class="story-quote">Me encanta el ambiente de la escuela. Los profesores están muy actualizados y las prácticas en empresa me abrieron las puertas al sector.</div>
+        <div class="story-name">María García</div>
+        <div class="story-degree">Grado en Ingeniería Informática · 4º curso</div>
+      </div>
+    </div>
+    <div class="story-card">
+      <div class="story-photo img-placeholder" style="border-bottom:2px solid var(--border)">📷 Foto Carlos</div>
+      <div class="story-content">
+        <div class="story-quote">El Máster en IA me dio una base teórica brutal. Ahora trabajo en un equipo de investigación en NLP que publica en las mejores conferencias.</div>
+        <div class="story-name">Carlos Rodríguez</div>
+        <div class="story-degree">Máster en Ingeniería Informática · Alumni 2024</div>
+      </div>
+    </div>
+    <div class="story-card">
+      <div class="story-photo img-placeholder" style="border-bottom:2px solid var(--border)">📷 Foto Ana</div>
+      <div class="story-content">
+        <div class="story-quote">Estudiar en la ETSIINF y hacer Erasmus me abrió la puerta a trabajar en Google. La formación técnica que recibí es de primer nivel.</div>
+        <div class="story-name">Ana López</div>
+        <div class="story-degree">Alumni · Software Engineer @ Google · Promoción 2022</div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:20px;display:flex;justify-content:center;gap:8px">
+    <span style="width:10px;height:10px;border-radius:50%;background:var(--accent);display:inline-block"></span>
+    <span style="width:10px;height:10px;border-radius:50%;background:var(--wire);border:1px solid var(--border);display:inline-block"></span>
+    <span style="width:10px;height:10px;border-radius:50%;background:var(--wire);border:1px solid var(--border);display:inline-block"></span>
+  </div>
+</section>
+
+<!-- ===== NOTICIAS Y EVENTOS ===== -->
+<section class="section">
+  <div class="section-title">Noticias y Eventos</div>
+  <div class="section-subtitle">Lo último de la ETSIINF</div>
+  <div class="news-layout">
+    <div class="news-main">
+      <div class="news-item">
+        <div class="news-thumb img-placeholder" style="border-bottom:2px solid var(--border)">📷 Imagen noticia destacada</div>
+        <div class="news-body">
+          <div class="news-date">15 marzo 2026 · Investigación</div>
+          <h3>Grupo de IA de la ETSIINF publica en NeurIPS 2026</h3>
+          <p>El equipo liderado por la profesora Martínez presenta un nuevo modelo de atención eficiente para transformers...</p>
+        </div>
+      </div>
+      <div class="news-small">
+        <div class="news-date">12 marzo 2026 · Estudios</div>
+        <h4>Abierta la preinscripción para el curso 2026-2027</h4>
+      </div>
+      <div class="news-small">
+        <div class="news-date">8 marzo 2026 · Igualdad</div>
+        <h4>Jornada de mujeres en STEM: charlas y mesas redondas</h4>
+      </div>
+    </div>
+    <div class="events-sidebar">
+      <h3>Próximos eventos</h3>
+      <div class="event-item">
+        <div class="event-date-box">25 MAR</div>
+        <h4>Jornada de Puertas Abiertas</h4>
+        <p>10:00 - 14:00 · Campus Moncloa</p>
+      </div>
+      <div class="event-item">
+        <div class="event-date-box">3 ABR</div>
+        <h4>Hackathon ETSIINF 2026</h4>
+        <p>48h · Abierto a todos los grados</p>
+      </div>
+      <div class="event-item">
+        <div class="event-date-box">15 ABR</div>
+        <h4>Feria de empleo tech</h4>
+        <p>+30 empresas · Sala de actos</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <h4>ETSIINF</h4>
+      <a href="#">Campus Moncloa</a>
+      <a href="#">Cómo llegar</a>
+      <a href="#">Contacto</a>
+      <a href="#">Directorio</a>
+      <a href="#">Mapa web</a>
+    </div>
+    <div>
+      <h4>Estudios</h4>
+      <a href="#">Grados</a>
+      <a href="#">Másteres</a>
+      <a href="#">Doctorado</a>
+      <a href="#">Títulos propios</a>
+      <a href="#">Calendario académico</a>
+    </div>
+    <div>
+      <h4>Servicios UPM</h4>
+      <a href="#">Politécnica Virtual</a>
+      <a href="#">Moodle UPM</a>
+      <a href="#">Correo UPM</a>
+      <a href="#">Biblioteca</a>
+      <a href="#">GATE</a>
+    </div>
+    <div>
+      <h4>Servicios ETSIINF</h4>
+      <a href="#">Intranet (SIU) 🔒</a>
+      <a href="#">Gestor incidencias</a>
+      <a href="#">Reserva de salas</a>
+      <a href="#">Red local</a>
+      <a href="#">Directorio interno</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>
+      <a class="footer-a11y" href="#">Declaración de Accesibilidad (RD 1112/2018)</a>
+      &nbsp;·&nbsp;
+      <a href="#" style="color:#aaa;text-decoration:none">Aviso legal</a>
+      &nbsp;·&nbsp;
+      <a href="#" style="color:#aaa;text-decoration:none">Política de privacidad</a>
+    </div>
+    <div>
+      <span style="margin-right:12px">Twitter</span>
+      <span style="margin-right:12px">LinkedIn</span>
+      <span style="margin-right:12px">Instagram</span>
+      <span>YouTube</span>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:16px;font-size:11px;color:#888">
+    © 2026 ETSIINF — Universidad Politécnica de Madrid
+  </div>
+</footer>
+
+</body>
+</html>

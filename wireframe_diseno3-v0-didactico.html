@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireframe · Página principal ETSIINF Web 2.0 (lo-fi)</title>
+<!--
+  ============================================================================
+  WIREFRAME LO-FI (estilo Balsamiq, B/N) — Página principal Web 2.0 ETSIINF
+  ----------------------------------------------------------------------------
+  Trazabilidad a hallazgos del User Research (informe v11 / slides 01-07-2026):
+    · 83% empieza en buscadores  -> buscador prominente + SEO (plataforma única)
+    · Salidas y prestigio deciden; la nota de corte se busca pero no decide
+      -> fichas de grado con salidas primero, nota de corte contextualizada
+    · Guías de 20 páginas incomprensibles -> píldoras en lenguaje de entrada
+    · Confusión entre grados afines -> comparador explícito
+    · Familia = 2º agente (48%) -> capa de contenido para familias
+    · Onboarding mal atendido -> guía paso a paso (admisión + primeros pasos)
+    · Tablón de anuncios ("Te ofrecemos" #8)
+    · Prestigio: prácticas, internacional, vida en campus ("Te ofrecemos" #9)
+    · Comparación detallada en PC (94,5%) pero descubrimiento en móvil
+      -> layout responsive, tabla comparadora colapsa a cards en móvil
+
+  Mapeo Drupal 11 (anotado por sección con comentarios [DRUPAL: ...]):
+    · Regiones: header / primary_menu / hero / content / footer (Olivero-like)
+    · Content types: pildora, grado, anuncio, paso_guia
+    · Vistas: anuncios_recientes (block), grados_comparador (block)
+    · Bloques custom: hero_buscador, franja_prestigio
+  Accesibilidad (WCAG 2.2 AA): skip link, landmarks, jerarquía h1-h3,
+    labels visibles, foco visible, targets >=24px, contraste AAA (negro/blanco),
+    reflow 320px, sin dependencia de color.
+  ============================================================================
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* ---------- Base Balsamiq ---------- */
+  :root{
+    --ink:#1a1a1a;
+    --ink-soft:#555;
+    --paper:#ffffff;
+    --fill:#f2f2f2;
+    --fill-dark:#e0e0e0;
+    /* borde "dibujado a mano" */
+    --sketch: 255px 15px 225px 15px / 15px 225px 15px 255px;
+    --sketch-alt: 15px 225px 15px 255px / 255px 15px 225px 15px;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    font-family:'Balsamiq Sans','Comic Sans MS','Segoe Print',cursive;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.45;
+  }
+  /* Fuente Balsamiq Sans cargada vía <link>; fallback Comic Sans MS */
+
+  h1,h2,h3{ line-height:1.2; margin:0 0 .5rem; }
+  h1{ font-size:clamp(1.6rem,4vw,2.4rem); }
+  h2{ font-size:clamp(1.25rem,3vw,1.6rem); }
+  h3{ font-size:1.05rem; }
+  p{ margin:.35rem 0; }
+  a{ color:var(--ink); text-underline-offset:3px; }
+  a:hover{ background:var(--fill-dark); }
+
+  /* Foco visible (WCAG 2.4.7) */
+  a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible{
+    outline:3px dashed var(--ink);
+    outline-offset:3px;
+  }
+
+  /* Skip link (WCAG 2.4.1) */
+  .skip-link{
+    position:absolute; left:-9999px; top:0;
+    background:var(--ink); color:var(--paper);
+    padding:.6rem 1rem; z-index:100;
+  }
+  .skip-link:focus{ left:.5rem; top:.5rem; }
+
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 1rem; }
+
+  /* Cajas estilo boceto */
+  .sketch{
+    border:2px solid var(--ink);
+    border-radius:var(--sketch);
+    background:var(--paper);
+  }
+  .sketch-alt{ border-radius:var(--sketch-alt); }
+
+  /* Placeholder de imagen con X (convención wireframe) */
+  .img-ph{
+    border:2px solid var(--ink);
+    background:
+      linear-gradient(to top right, transparent calc(50% - 1px), var(--ink) 50%, transparent calc(50% + 1px)),
+      linear-gradient(to bottom right, transparent calc(50% - 1px), var(--ink) 50%, transparent calc(50% + 1px)),
+      var(--fill);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--ink-soft); font-size:.85rem; text-align:center;
+    min-height:90px;
+  }
+
+  /* Etiqueta de anotación (mapeo Drupal, visible en el wireframe) */
+  .note{
+    display:inline-block;
+    font-size:.7rem;
+    border:1px dashed var(--ink-soft);
+    color:var(--ink-soft);
+    padding:.1rem .45rem;
+    border-radius:6px;
+    margin-bottom:.5rem;
+    background:var(--paper);
+  }
+
+  .btn{
+    display:inline-block;
+    font-family:inherit; font-size:1rem; font-weight:700;
+    border:2px solid var(--ink);
+    border-radius:var(--sketch);
+    background:var(--paper); color:var(--ink);
+    padding:.6rem 1.2rem;
+    min-height:44px; min-width:44px;  /* target >= 24px (2.5.8), holgado */
+    cursor:pointer; text-decoration:none;
+  }
+  .btn:hover{ background:var(--fill-dark); }
+  .btn--primary{ background:var(--ink); color:var(--paper); }
+  .btn--primary:hover{ background:#333; }
+
+  /* ---------- Header ---------- */
+  header.site{
+    border-bottom:3px solid var(--ink);
+  }
+  .header-top{
+    display:flex; align-items:center; gap:1rem;
+    padding:.75rem 0;
+    flex-wrap:wrap;
+  }
+  .logo-ph{
+    width:150px; height:52px; flex:none;
+    font-weight:700;
+  }
+  .util{ margin-left:auto; display:flex; gap:.75rem; align-items:center; font-size:.9rem; }
+
+  nav.primary ul{
+    list-style:none; margin:0; padding:0;
+    display:flex; gap:.25rem; flex-wrap:wrap;
+  }
+  nav.primary a{
+    display:block; padding:.65rem .9rem;
+    text-decoration:none; font-weight:700;
+    border:2px solid transparent;
+  }
+  nav.primary a:hover, nav.primary a[aria-current="page"]{
+    border:2px solid var(--ink);
+    border-radius:var(--sketch-alt);
+  }
+  .menu-toggle{ display:none; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    /* Placeholder de imagen de fondo (convención wireframe: trama diagonal) */
+    border-bottom:3px solid var(--ink);
+    background:
+      repeating-linear-gradient(45deg, transparent 0 14px, #d9d9d9 14px 16px),
+      var(--fill);
+    padding:3.5rem 0;
+    position:relative;
+  }
+  .hero .bg-label{
+    position:absolute; top:.6rem; right:.9rem;
+    font-size:.72rem; color:var(--ink-soft);
+    background:var(--paper); border:1px dashed var(--ink-soft);
+    border-radius:6px; padding:.1rem .5rem;
+  }
+  .hero-panel{
+    max-width:640px;
+    background:var(--paper);
+    padding:2rem 2.25rem;
+    border:2px solid var(--ink);
+    border-radius:var(--sketch);
+  }
+  .hero-ctas{ display:flex; gap:.75rem; margin-top:1.25rem; flex-wrap:wrap; }
+
+  /* Franja de búsqueda bajo el hero */
+  .search-strip{
+    border-bottom:2px dashed var(--ink-soft);
+    padding:1.5rem 0;
+    background:var(--paper);
+  }
+  .search-box{
+    display:flex; gap:.5rem; flex-wrap:wrap; align-items:center;
+  }
+  .search-box label{ font-weight:700; flex:none; }
+  .search-box input[type="search"]{
+    flex:1 1 240px;
+    font-family:inherit; font-size:1rem;
+    padding:.6rem .9rem;
+    border:2px solid var(--ink);
+    border-radius:var(--sketch-alt);
+    background:var(--paper);
+  }
+
+  /* ---------- Secciones ---------- */
+  section{ padding:2.25rem 0; }
+  section + section{ border-top:2px dashed var(--ink-soft); }
+  .section-head{ display:flex; align-items:baseline; gap:1rem; flex-wrap:wrap; }
+  .section-head .more{ margin-left:auto; font-size:.9rem; }
+
+  .cards{
+    display:grid; gap:1rem; margin-top:1rem;
+    grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));
+  }
+  .card{ padding:1rem; }
+  .card .tag{
+    font-size:.72rem; font-weight:700;
+    border:1.5px solid var(--ink);
+    border-radius:10px;
+    padding:.05rem .5rem;
+    display:inline-block; margin-bottom:.4rem;
+    background:var(--fill);
+  }
+  .card a.stretch{ font-weight:700; }
+
+  /* (La antigua tabla comparativa se sustituyó por tarjetas de grado;
+     el comparador detallado vive en su propia página, no en la home) */
+
+  /* Guía paso a paso */
+  .steps{
+    list-style:none; counter-reset:paso;
+    display:grid; gap:1rem; margin:1rem 0 0; padding:0;
+    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+  }
+  .steps li{
+    counter-increment:paso;
+    padding:1rem 1rem 1rem 3.4rem;
+    position:relative;
+  }
+  .steps li::before{
+    content:counter(paso);
+    position:absolute; left: .9rem; top: .9rem;
+    width:1.9rem; height:1.9rem;
+    border:2px solid var(--ink); border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700; background:var(--fill);
+  }
+
+  /* Tablón de anuncios */
+  .board{ display:grid; grid-template-columns:2fr 1fr; gap:1.5rem; margin-top:1rem; }
+  .board ul{ list-style:none; margin:0; padding:0; }
+  .board li{
+    display:flex; gap:.9rem; align-items:baseline;
+    padding:.7rem .25rem;
+    border-bottom:1.5px solid var(--fill-dark);
+    flex-wrap:wrap;
+  }
+  .board time{
+    flex:none; font-size:.8rem; font-weight:700;
+    border:1.5px solid var(--ink); border-radius:8px;
+    padding:.1rem .5rem; background:var(--fill);
+  }
+  .board .cat{ font-size:.75rem; color:var(--ink-soft); }
+
+  /* Franja prestigio */
+  .stats{
+    display:grid; gap:1rem; margin-top:1rem;
+    grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+    text-align:center;
+  }
+  .stats .num{ font-size:1.9rem; font-weight:700; display:block; }
+
+  /* ---------- Footer ---------- */
+  footer.site{
+    border-top:3px solid var(--ink);
+    margin-top:2rem; padding:2rem 0;
+    background:var(--fill);
+  }
+  .foot-grid{
+    display:grid; gap:1.5rem;
+    grid-template-columns:repeat(auto-fit, minmax(190px, 1fr));
+    font-size:.9rem;
+  }
+  footer.site ul{ list-style:none; margin:.4rem 0 0; padding:0; }
+  footer.site li{ margin:.3rem 0; }
+  .legal{ margin-top:1.5rem; font-size:.8rem; color:var(--ink-soft); }
+
+  /* ---------- Mobile (reflow 1.4.10) ---------- */
+  @media (max-width: 760px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .board{ grid-template-columns:1fr; }
+
+    .menu-toggle{
+      display:inline-block; margin-left:auto;
+    }
+    .util{ margin-left:0; width:100%; justify-content:flex-end; }
+    nav.primary{ width:100%; }
+    nav.primary ul{ flex-direction:column; display:none; padding-bottom:.75rem; }
+    nav.primary.open ul{ display:flex; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+<!-- [DRUPAL: region "header" — bloque branding + bloque utilidades + menú principal] -->
+<header class="site">
+  <div class="wrap">
+    <div class="header-top">
+      <div class="img-ph logo-ph sketch-alt" role="img" aria-label="Logotipo ETSIINF (placeholder)">LOGO<br>ETSIINF · UPM</div>
+
+      <button class="btn menu-toggle" aria-expanded="false" aria-controls="menu-principal"
+              onclick="const n=document.getElementById('menu-principal');n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'));">
+        ☰ Menú
+      </button>
+
+      <div class="util">
+        <!-- [DRUPAL: language switcher block — versión EN completa = hallazgo severidad Alta] -->
+        <a href="#" lang="es">ES</a> / <a href="#" lang="en" hreflang="en">EN</a>
+        <!-- [DRUPAL: link a intranet (Web pública ≠ Intranet: estrategia de ecosistema)] -->
+        <a class="btn" href="#">Intranet</a>
+      </div>
+    </div>
+
+    <!-- [DRUPAL: region "primary_menu" — menú "main". Máx. 5 entradas: IA pendiente de Fase 1] -->
+    <nav class="primary" id="menu-principal" aria-label="Navegación principal">
+      <ul>
+        <li><a href="#" aria-current="page">Inicio</a></li>
+        <li><a href="#grados">Estudios</a></li>
+        <li><a href="#admision">Admisión</a></li>
+        <li><a href="#">La Escuela</a></li>
+        <li><a href="#">Investigación</a></li>
+        <li><a href="#">Internacional</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <!-- ======================================================================
+       HERO · "Encuéntranos" (estrategia 1: plataforma única + visibilidad)
+       Limpio y breve, tono institucional cercano; imagen de fondo aporta el
+       estilo (foto de campus/estudiantes). El buscador va justo debajo.
+       [DRUPAL: region "hero" — bloque custom con media de fondo]
+       ====================================================================== -->
+  <section class="hero" aria-labelledby="h-hero">
+    <span class="bg-label">Imagen de fondo: campus / estudiantes (placeholder)</span>
+    <div class="wrap">
+      <div class="hero-panel">
+        <h1 id="h-hero">La ETSIINF te da la bienvenida</h1>
+        <p>Descubre nuestros grados y másteres en Ingeniería Informática, Informática y Mátemáticas, Ciencia de Datos e Inteligencia Artificial, y mucho más.
+           Descubre qué estudiarás y el futuro profesional qué te espera.</p>
+        <div class="hero-ctas">
+          <a class="btn btn--primary" href="#grados">Conoce nuestros grados</a>
+          <a class="btn" href="#admision">Cómo acceder, paso a paso</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Franja de búsqueda (hallazgo: 83% empieza en buscadores; visibilidad
+       como condición previa). [DRUPAL: bloque Search API / búsqueda del core] -->
+  <section class="search-strip" aria-labelledby="h-buscar">
+    <div class="wrap">
+      <span class="note">[Drupal: bloque de búsqueda Search API]</span>
+      <form class="search-box" role="search" action="#" method="get">
+        <label for="q" id="h-buscar">¿Buscas algo concreto?</label>
+        <input type="search" id="q" name="q"
+               placeholder="p. ej. «nota de corte», «salidas de IA», «matrícula»">
+        <button type="submit" class="btn btn--primary">Buscar</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       PÍLDORAS · "Te formamos" (estrategias 2-5: lenguaje de entrada,
+       reencuadre, capa para familias, tono humano)
+       Hallazgo: el plan «se encuentra pero no se entiende»; guías de 20 págs.
+       [DRUPAL: content type "pildora" (título, resumen, audiencia, cuerpo);
+        View "pildoras_destacadas" en modo grid, 4 items]
+       ====================================================================== -->
+  <section aria-labelledby="h-pildoras">
+    <div class="wrap">
+      <span class="note">[Drupal: View «píldoras» · content type píldora · campo audiencia]</span>
+      <div class="section-head">
+        <h2 id="h-pildoras">Entiende la universidad en 2 minutos</h2>
+        <a class="more" href="#">Ver todas las píldoras →</a>
+      </div>
+      <p>Explicaciones breves y claras de lo que necesitas para decidir —
+         y para responder a las preguntas que te harán en casa.</p>
+
+      <div class="cards">
+        <article class="card sketch">
+          <span class="tag">Antes de decidir</span>
+          <h3><a class="stretch" href="#">¿Qué es la nota de corte (y qué no es)?</a></h3>
+          <p>No mide la dificultad de la carrera: refleja plazas y demanda. Te lo explicamos.</p>
+        </article>
+
+        <article class="card sketch-alt sketch">
+          <span class="tag">Antes de decidir</span>
+          <h3><a class="stretch" href="#">ECTS, créditos y horas: cuánto se estudia de verdad</a></h3>
+          <p>Qué significa «240 ECTS» traducido a semanas, clases y exámenes.</p>
+        </article>
+
+        <article class="card sketch">
+          <span class="tag">Antes de decidir</span>
+          <h3><a class="stretch" href="#">Coste real, becas y empleabilidad: los números claros</a></h3>
+          <p>Cuánto cuesta la matrícula, qué ayudas existen y qué futuro laboral te espera.</p>
+        </article>
+
+        <article class="card sketch-alt sketch">
+          <span class="tag">Recién admitidos</span>
+          <h3><a class="stretch" href="#">Me han admitido, ¿y ahora qué? (onboarding)</a></h3>
+          <p>Matrícula, carné, Moodle, correo UPM y tu primera semana, en orden.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       GRADOS · "Te ofrecemos" (estrategia 6: fichas comparables)
+       Hallazgos: confusión entre grados afines; salidas y prestigio deciden;
+       la nota de admisión se contextualiza (riesgo de comunicación).
+       Formato: TARJETAS con lo imprescindible (nombre, salidas, plan breve,
+       asignaturas) + acceso al comparador detallado (uso en PC, 94,5%).
+       [DRUPAL: content type "grado" (salidas, plan_resumen, asignaturas,
+        nota_admision, ects); View "grados_home" en modo teaser/card]
+       ====================================================================== -->
+  <section id="grados" aria-labelledby="h-grados">
+    <div class="wrap">
+      <span class="note">[Drupal: View «grados» modo card · 1 tarjeta = 1 nodo grado]</span>
+      <div class="section-head">
+        <h2 id="h-grados">Nuestros grados</h2>
+        <a class="more" href="#">Toda la oferta de estudios →</a>
+      </div>
+      <p>Parecidos entre sí, pero no iguales. Cada tarjeta resume lo esencial;
+         la ficha completa lo cuenta en una página.</p>
+
+      <div class="cards">
+        <article class="card sketch">
+          <h3><a href="#">Grado en Ingeniería Informática</a></h3>
+          <p><em>«Construyes la tecnología»</em></p>
+          <p><strong>Salidas:</strong> desarrollo de software, sistemas, ciberseguridad, consultoría…</p>
+          <p><strong>Asignaturas destacadas:</strong> programación, redes, ingeniería del software…</p>
+          <p>240 ECTS · 4 años · Nota de admisión 2025: XX,XX</p>
+          <p style="margin-top:.75rem;">
+            <a class="btn" href="#">Ficha del plan en 1 página</a>
+          </p>
+        </article>
+
+        <article class="card sketch sketch-alt">
+          <h3><a href="#">Grado en Ciencia de Datos e IA</a></h3>
+          <p><em>«Haces hablar a los datos»</em></p>
+          <p><strong>Salidas:</strong> ciencia de datos, inteligencia artificial, analítica…</p>
+          <p><strong>Asignaturas destacadas:</strong> aprendizaje automático, estadística, big data…</p>
+          <p>240 ECTS · 4 años · Nota de admisión 2025: XX,XX</p>
+          <p style="margin-top:.75rem;">
+            <a class="btn" href="#">Ficha del plan en 1 página</a>
+          </p>
+        </article>
+
+        <article class="card sketch">
+          <h3><a href="#">Grado en Matemáticas e Informática</a></h3>
+          <p><em>«La teoría detrás de todo»</em></p>
+          <p><strong>Salidas:</strong> investigación, algoritmia, análisis cuantitativo…</p>
+          <p><strong>Asignaturas destacadas:</strong> álgebra, computación, optimización…</p>
+          <p>240 ECTS · 4 años · Nota de admisión 2025: XX,XX</p>
+          <p style="margin-top:.75rem;">
+            <a class="btn" href="#">Ficha del plan en 1 página</a>
+          </p>
+        </article>
+      </div>
+
+      <p style="margin-top:1.25rem;">
+        <a class="btn btn--primary" href="#">Comparar los grados en detalle →</a>
+      </p>
+      <p id="nota-corte" style="font-size:.85rem; color:var(--ink-soft);">
+        * La nota de admisión refleja plazas y demanda, no la dificultad ni la calidad del grado.
+        <a href="#">Píldora: entender la nota de corte</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       GUÍA PASO A PASO · "Te ofrecemos" (estrategia 7: procesos guiados)
+       Hallazgos: 94% decide en los últimos 2 años (2º Bach + EvAU);
+       onboarding = segundo momento mal atendido.
+       [DRUPAL: content type "paso_guia" o paragraphs; una guía por proceso]
+       ====================================================================== -->
+  <section id="admision" aria-labelledby="h-admision">
+    <div class="wrap">
+      <span class="note">[Drupal: nodo guía con Paragraphs «paso» reordenables]</span>
+      <h2 id="h-admision">De la EvAU a tu primer día de clase</h2>
+      <p>El proceso completo, sin PDFs de 20 páginas. Cada paso enlaza a su guía corta.</p>
+
+      <ol class="steps">
+        <li class="sketch">
+          <h3><a href="#">Elige tu grado</a></h3>
+          <p>Compara salidas, plan y campus. Con tu familia si quieres: hay guía para ellos.</p>
+        </li>
+        <li class="sketch sketch-alt">
+          <h3><a href="#">Solicita plaza</a></h3>
+          <p>Fechas, preinscripción UPM y cómo ordenar tus opciones.</p>
+        </li>
+        <li class="sketch">
+          <h3><a href="#">Matricúlate</a></h3>
+          <p>Documentos, precios reales, becas y pago fraccionado.</p>
+        </li>
+        <li class="sketch sketch-alt">
+          <h3><a href="#">Aterriza (onboarding)</a></h3>
+          <p>Cuenta UPM, Moodle, carné, delegación de alumnos y jornada de bienvenida.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       TABLÓN DE ANUNCIOS · "Te ofrecemos" (estrategia 8)
+       Sustituye el «cajón desastre» de noticias: canal único con categorías
+       y fecha visible (gobernanza + custodia de la información).
+       [DRUPAL: content type "anuncio" (fecha, categoría taxonomía, cuerpo);
+        View "anuncios_recientes" bloque, 6 items + RSS]
+       ====================================================================== -->
+  <section aria-labelledby="h-tablon">
+    <div class="wrap">
+      <span class="note">[Drupal: View «anuncios» · taxonomía categoría · feed RSS]</span>
+      <div class="section-head">
+        <h2 id="h-tablon">Tablón de anuncios</h2>
+        <a class="more" href="#">Todos los anuncios →</a>
+      </div>
+
+      <div class="board">
+        <ul>
+          <li>
+            <time datetime="2026-07-01">01 jul</time>
+            <span><a href="#">Listados provisionales de admisión al Grado en II</a>
+            <span class="cat">· Admisión</span></span>
+          </li>
+          <li>
+            <time datetime="2026-06-28">28 jun</time>
+            <span><a href="#">Convocatoria de becas de colaboración 2026–27</a>
+            <span class="cat">· Becas</span></span>
+          </li>
+          <li>
+            <time datetime="2026-06-25">25 jun</time>
+            <span><a href="#">Horarios del primer semestre publicados</a>
+            <span class="cat">· Docencia</span></span>
+          </li>
+          <li>
+            <time datetime="2026-06-20">20 jun</time>
+            <span><a href="#">Jornada de puertas abiertas: inscripción abierta</a>
+            <span class="cat">· Eventos</span></span>
+          </li>
+          <li>
+            <time datetime="2026-06-18">18 jun</time>
+            <span><a href="#">Cierre del plazo de movilidad Erasmus+ salientes</a>
+            <span class="cat">· Internacional</span></span>
+          </li>
+        </ul>
+
+        <aside class="card sketch" aria-label="Fechas clave">
+          <h3>Fechas clave</h3>
+          <ul style="list-style:none; padding:0; margin:.5rem 0 0;">
+            <li>📌 Preinscripción: <strong>hasta XX jul</strong></li>
+            <li>📌 Matrícula 1.º: <strong>XX–XX jul</strong></li>
+            <li>📌 Bienvenida: <strong>XX sep</strong></li>
+          </ul>
+          <p style="margin-top:.75rem;"><a href="#">Calendario académico completo →</a></p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       FRANJA "CON PRESTIGIO" · "Te ofrecemos" (estrategia 9)
+       Hallazgo: prestigio y salidas son directrices de decisión.
+       [DRUPAL: bloque custom "franja_prestigio" (editable por negociado)]
+       ====================================================================== -->
+  <section aria-labelledby="h-prestigio">
+    <div class="wrap">
+      <span class="note">[Drupal: bloque custom con campos numéricos editables]</span>
+      <h2 id="h-prestigio">Una escuela con recorrido</h2>
+
+      <div class="stats">
+        <div class="card sketch"><span class="num">XX %</span> empleabilidad al año de egresar</div>
+        <div class="card sketch sketch-alt"><span class="num">XXX+</span> empresas con convenio de prácticas</div>
+        <div class="card sketch"><span class="num">XX</span> destinos internacionales de intercambio</div>
+        <div class="card sketch sketch-alt"><span class="num">Top X</span> en rankings nacionales (fuente)</div>
+      </div>
+
+      <div class="cards" style="margin-top:1.25rem;">
+        <article class="card sketch">
+          <div class="img-ph" style="margin-bottom:.6rem;">Foto prácticas</div>
+          <h3><a href="#">Prácticas en empresa</a></h3>
+        </article>
+        <article class="card sketch sketch-alt">
+          <div class="img-ph" style="margin-bottom:.6rem;">Foto internacional</div>
+          <h3><a href="#">Internacional y dobles titulaciones</a></h3>
+        </article>
+        <article class="card sketch">
+          <div class="img-ph" style="margin-bottom:.6rem;">Foto vida en campus</div>
+          <h3><a href="#">Vida en el campus y asociaciones</a></h3>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- [DRUPAL: region "footer" — 4 bloques de menú + bloque legal.
+     Declaración de accesibilidad = obligatoria (RD 1112/2018) y hallazgo Crítico] -->
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h3>ETSIINF · UPM</h3>
+        <p>Campus de Montegancedo<br>Boadilla del Monte, Madrid</p>
+        <p><a href="#">Cómo llegar</a></p>
+      </div>
+      <nav aria-label="Estudios (pie)">
+        <h3>Estudios</h3>
+        <ul>
+          <li><a href="#">Grados</a></li>
+          <li><a href="#">Másteres</a></li>
+          <li><a href="#">Doctorado</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Comunidad (pie)">
+        <h3>Comunidad</h3>
+        <ul>
+          <li><a href="#">Intranet</a></li>
+          <li><a href="#">Delegación de alumnos</a></li>
+          <li><a href="#">Antiguos alumnos</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Legal y ayuda (pie)">
+        <h3>Legal y ayuda</h3>
+        <ul>
+          <li><a href="#">Declaración de accesibilidad</a></li>
+          <li><a href="#">Aviso legal y privacidad</a></li>
+          <li><a href="#">Mapa web</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+    <p class="legal">Wireframe Fo-Fi (Balsamiq), HTML+CSS generado con Claude Fable 5 · Proyecto Web 2.0 ETSIINF · Julio 2026 · digitalizacion.etsiinf@upm.es ·
+       Contenidos y cifras «XX» son placeholders.</p>
+  </div>
+</footer>
+
+</body>
+</html>
